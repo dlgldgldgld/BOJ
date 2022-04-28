@@ -1,4 +1,20 @@
 # Tips of python
+## split 주의
+split은 sep 값에 아무것도 넣지 않으면 모든 공백에 대해서 처리를 해준다. 
+그래서 아래의 예시는 결과가 다르게 나온다.
+
+```python
+word1 = input().strip().split(" ")
+word2 = input().strip().split()
+print(word1)
+print(word2)
+```
+
+```text
+['']
+[]
+```
+
 ## list-element index 호출
 - list.index(element)
 ex) list = ['a','b','c']

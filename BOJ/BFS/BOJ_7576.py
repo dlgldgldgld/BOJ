@@ -2,6 +2,7 @@ from queue import Queue
 from collections import deque
 from sys import stdin
 
+
 class st_task:
     def __init__(self, x, y, dis):
         self.x = x
@@ -9,18 +10,19 @@ class st_task:
         self.dis = dis
 
     def __str__(self):
-        return f'x={self.x}, y={self.y}, dis={self.dis}'
+        return f"x={self.x}, y={self.y}, dis={self.dis}"
+
 
 def main():
     # f = open("test.txt", "r")
     # w, h = map(int, input().split(' '))
-    w, h = map(int, stdin.readline().split(' '))
+    w, h = map(int, stdin.readline().split(" "))
     # w, h = map(int, f.readline().split(' '))
     board = []
     visited = []
-    for _ in range(h) :
+    for _ in range(h):
         # board.append(list(map(int, f.readline().split(' '))))
-        board.append(list(map(int, stdin.readline().split(' '))))
+        board.append(list(map(int, stdin.readline().split(" "))))
         # board.append(list(map(int, input().split(' '))))
         visited.append([False] * w)
 
@@ -32,10 +34,10 @@ def main():
 
     queue = deque()
     for y in range(h):
-            for x in range(w):
-                if board[y][x] == 1 :
-                    visited[y][x] == True
-                    queue.append(st_task(x,y,0))
+        for x in range(w):
+            if board[y][x] == 1:
+                visited[y][x] == True
+                queue.append(st_task(x, y, 0))
 
     while queue:
         task = queue.popleft()
@@ -52,9 +54,9 @@ def main():
                 continue
             if visited[n_y][n_x] == True or board[n_y][n_x] != 0:
                 continue
-            
+
             visited[n_y][n_x] = True
-            queue.append(st_task(n_x,n_y,c_dis + 1))
+            queue.append(st_task(n_x, n_y, c_dis + 1))
 
     for x in range(w):
         for y in range(h):
@@ -63,6 +65,7 @@ def main():
 
     print(answer)
     # print(call)
+
 
 if __name__ == "__main__":
     main()
