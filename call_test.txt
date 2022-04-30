@@ -1,2 +1,0 @@
-x=999, y=999, dis=1999, is_crush=True
-x=999, y=999, dis=1999, is_crush=False
