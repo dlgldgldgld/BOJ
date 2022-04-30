@@ -1,4 +1,10 @@
 # Tips of python
+## Class 주의
+container 사용시 class를 사용할때가 있는데, task 100만개 차이가 1초가까이 발생한다.
+가능하면 list로 코드를 작성하자.
+
+![image](https://user-images.githubusercontent.com/18378009/166109002-71187a41-baab-4fe0-bd39-70c2a40521ab.png)
+
 ## split 주의
 split은 sep 값에 아무것도 넣지 않으면 모든 공백에 대해서 처리를 해준다. 
 그래서 아래의 예시는 결과가 다르게 나온다.
