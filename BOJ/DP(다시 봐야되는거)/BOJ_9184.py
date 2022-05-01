@@ -1,12 +1,6 @@
+from sys import stdin
 
-dp = []
-for i in range(21):
-    dp.append([])
-    for j in range(21):
-        dp[i].append([])
-        for k in range(21):
-            dp[i][j].append(1)
-
+dp = [[[1] * 21 for _ in range(21)] for _ in range(21)]
 
 for i in range(1, 21):
     for j in range(1, 21):
@@ -17,7 +11,7 @@ for i in range(1, 21):
                 dp[i][j][k] = dp[i-1][j][k] + dp[i-1][j-1][k] + dp[i-1][j][k-1] - dp[i-1][j-1][k-1]
 
 while (True):
-    i,j,k = map(int, input().split())
+    i,j,k = map(int, stdin.readline().split())
     if i == -1 and j == -1 and k == -1:
         break
     
