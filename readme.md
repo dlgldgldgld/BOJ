@@ -1,4 +1,17 @@
 # Tips of python
+
+## min, max heap
+python의 heapq는 min heap을 지원함. 그래서 max heap으로 만드려면 조금 응용이 필요.
+list에 tuple을 넣어서 음수로 첫인자를 넣으면 max_heap이 구성됨.
+
+```python
+from sys import stdin
+from heapq import heappush, heappop
+
+k = heappop(h)[1]
+heappush(h, (-a, a))
+```
+
 ## Class 주의
 container 사용시 class를 사용할때가 있는데, task 100만개 차이가 1초가까이 발생한다.
 가능하면 list로 코드를 작성하자.
