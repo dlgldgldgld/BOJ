@@ -1,64 +1,43 @@
+from itertools import combinations_with_replacement
+
+def compare(a, b):
+    return a[::-1] > b[::-1]
+
+
 def solution(n, info):
-    answer = [0] * 11 
-    # [0,0,0,0,0,0,0,0,0,0] , 0
-    # [1,0,0,0,0,0,0,0,0,0] , 1
-    # [0,1,0,0,0,0,0,0,0,0] , 2
-    # [1,1,0,0,0,0,0,0,0,0] , 3
-    # [0,0,1,0,0,0,0,0,0,0]
-    lion_board = [0] * 11
-    max_lion_board = [0] * 11
-    max = 0
-    noanswer = True
-    for i in range (0, 2048) :
-        k = list(str(bin(i & 2047)))[2:]
-        k.reverse()
-        for j, v in enumerate(k):
-            lion_board[j] = int(v)
+    ret = [-1] * 12
+    max_score = -1
+    for comb in combinations_with_replacement(range(11), n):
+        lion_arrow = [0] * 11
+        for i in comb:
+            lion_arrow[i] += 1
+        score = 0
+        for i in range(11):
+            if info[i] < lion_arrow[i]:
+                score += (10-i)
+            elif info[i] >= lion_arrow[i] and info[i] != 0:
+                score -= (10-i)
+        
+        if score <= 0 : 
+            continue
 
-        lion_cnt = 0
-        lion_score = 0
-        app_score = 0
-        for score in range(0, 11):
-            if lion_board[score] == 1 :
-                lion_cnt += info[score] + 1
-                lion_score += (10-score)
-            
-            if lion_board[score] == 0 and info[score] > 0:
-                app_score += (10-score)
-
-        if ( lion_cnt <= n 
-             and max <= (lion_score-app_score)
-             and (lion_score-app_score) > 0 ):
-            max = (lion_score-app_score)
-            max_lion_board = lion_board[:]
-            noanswer = False
-            #print(lion_cnt, lion_score-app_score, i, lion_board)
-
-    remain_arrow = n
-    for i in range(0, 10):
-        if max_lion_board[i] == True :
-            answer[i] = info[i]+1
-            remain_arrow -= answer[i]
+        if max_score < score :
+            max_score = score
+            ret = lion_arrow[:]
+        
+        elif max_score == score:
+            if compare(lion_arrow, ret) :
+                ret = lion_arrow[:]
     
-    if remain_arrow > 0:
-        answer[10] = remain_arrow
-    
-    if noanswer == True :
-        answer = [-1]
-    
-    return answer
+    if ret[0] == -1:
+        ret = [-1]
 
-# info = [2,1,1,1,0,0,0,0,0,0,0]
-# n = 5
-# print(solution(n, info))
+    return ret
 
-# info = [1,0,0,0,0,0,0,0,0,0,0]
-# n = 1
-# print(solution(n, info))
 
-# info = [0,0,1,2,0,1,1,1,1,1,1]
-# n = 9
-# print(solution(n, info))
+info = [0,0,1,2,0,1,1,1,1,1,1]
+n = 9
+print(solution(n, info))
 
 # info = [0,0,0,0,0,0,0,0,3,4,3]
 # n = 10
