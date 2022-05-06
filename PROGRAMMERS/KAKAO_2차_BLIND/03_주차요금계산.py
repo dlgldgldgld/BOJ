@@ -20,8 +20,9 @@ def solution(fees, records):
             diff_hour   = c_hour - in_hour
             diff_minute = c_minute - in_minute
             car_info[c_number][2] += diff_hour * 60 + diff_minute
-    
-    for rec in car_info.items() :
+
+    answer = []
+    for rec in sorted(car_info.items()):
         if rec[1][0] == True:
             rec[1][0] = False
             c_hour, c_minute = 23, 59
@@ -32,9 +33,7 @@ def solution(fees, records):
             diff_hour   = c_hour - in_hour
             diff_minute = c_minute - in_minute
             rec[1][2] += diff_hour * 60 + diff_minute
-    
-    answer = []
-    for rec in sorted(car_info.items()):
+
         recipe = 0
         sum = rec[1][2]
         if sum <= fees[0] :
@@ -46,4 +45,6 @@ def solution(fees, records):
         if sum > 0 :
             recipe += int(ceil(sum / fees[2])) * fees[3]    
         answer.append(recipe)
+
     return answer
+
