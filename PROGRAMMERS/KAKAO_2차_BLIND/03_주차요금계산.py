@@ -4,8 +4,7 @@ def solution(fees, records):
     car_info = dict()
     for record in records:
         c_time, c_number, c_inout = record.split()
-        c_hour, c_minute = c_time.split(":")
-        c_hour, c_minute = int(c_hour), int(c_minute)
+        c_hour, c_minute = map(int,c_time.split(":"))
         if c_inout == "IN":
             if c_number in car_info.keys():
                 car_info[c_number][0] = True
