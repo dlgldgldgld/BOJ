@@ -53,15 +53,6 @@ void solution( int idx , int from_i )
 	col_cnt++;
 	if (idx == g_m || from_i == g_lists_size )
 	{
-		/*fprintf(out, "selected words : ");
-		for (int i = 0; i < 26; i++)
-		{
-			if (b_select[i] == true)
-			{
-				fprintf(out, "%c", i + 97);
-			}
-		}
-		fprintf(out, "\n");*/
 		g_answer = std::max(g_answer, GetMatchedLists( ));
 		return;
 	}
